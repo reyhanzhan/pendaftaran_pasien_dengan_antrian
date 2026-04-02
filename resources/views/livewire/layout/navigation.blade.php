@@ -36,7 +36,16 @@ new class extends Component
                     <x-nav-link :href="route('jadwal_praktik.index')" :active="request()->routeIs('jadwal_praktik.index')" wire:navigate>
                         {{ __('jadwal praktik') }}
                     </x-nav-link>
-                    
+                    @if(auth()->user()->role === 'admin')
+                        <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.*')">
+                            {{ __('Admin Panel') }}
+                        </x-nav-link>
+                    @endif
+                    @if(auth()->user()->role === 'dokter')
+                        <x-nav-link :href="route('dokter.dashboard')" :active="request()->routeIs('dokter.*')">
+                            {{ __('Panel Dokter') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 

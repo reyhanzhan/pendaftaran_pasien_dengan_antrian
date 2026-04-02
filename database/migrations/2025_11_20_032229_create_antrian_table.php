@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('antrians', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('dokter_id')->constrained('dokters')->onDelete('cascade');
-            $table->string('hari', 50);
-            $table->time('jam_mulai');
-            $table->time('jam_selesai');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('dokter_id')->nullable()->constrained('dokters')->onDelete('cascade');
+            $table->integer('nomor')->unique();
+            $table->string('hari', 50)->nullable();
+            $table->date('tanggal')->nullable();
+            $table->time('jam_mulai')->nullable();
+            $table->time('jam_selesai')->nullable();
+            $table->enum('status', ['menunggu', 'dipanggil', 'selesai', 'tidak_hadir'])->default('menunggu');
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('antrians');
     }
 };

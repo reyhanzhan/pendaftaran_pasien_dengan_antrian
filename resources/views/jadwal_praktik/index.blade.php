@@ -37,14 +37,9 @@
                     {{-- <td>{{ $jadwal->kuota - $jadwal->antrian_pasiens_count }}</td> --}}
                     <td>
                         @if ($jadwal->kuota - $jadwal->antrian_pasiens_count > 0)
-                            <form action="{{ route('antrian.daftar') }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="jadwal_praktek_id" value="{{ $jadwal->id }}">
-                                <input type="hidden" name="tanggal_praktek" value="{{ $jadwal->tanggal_praktek }}">
-                                <button type="submit" class="btn btn-primary">Daftar</button>
-                            </form>
+                            <a href="{{ route('konsultasi.index') }}?jadwal={{ $jadwal->id }}" class="btn btn-primary bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Daftar</a>
                         @else
-                            <button class="btn btn-danger" disabled>Penuh</button>
+                            <button class="btn btn-danger bg-gray-400 text-white px-4 py-2 rounded cursor-not-allowed" disabled>Penuh</button>
                         @endif
                     </td>
                 </tr>

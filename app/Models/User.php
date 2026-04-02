@@ -22,8 +22,39 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'nomor_antrian',
+        'role',
+        'nik',
+        'no_telp',
+        'jenis_kelamin',
+        'tanggal_lahir',
+        'alamat',
+        'golongan_darah',
+        'tinggi_badan',
+        'berat_badan',
+        'alergi',
+        'riwayat_penyakit',
+        'is_admin',
     ];
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isDokter(): bool
+    {
+        return $this->role === 'dokter';
+    }
+
+    public function isPasien(): bool
+    {
+        return $this->role === 'pasien';
+    }
+
+    public function dokter()
+    {
+        return $this->hasOne(Dokter::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.
